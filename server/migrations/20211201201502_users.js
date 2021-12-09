@@ -3,6 +3,7 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.string("firstName", 255).notNullable();
     table.string("lastName", 255).notNullable();
+    // table.string
   });
 };
 
