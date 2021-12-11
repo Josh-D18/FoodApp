@@ -11,7 +11,7 @@ router
         "https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11&maxFat=25"
       )
       .then(async (response) => {
-        await res.json(response.data);
+        res.json(response.data);
       })
       .catch((error) => console.error(error));
   })
@@ -21,7 +21,7 @@ router
         `https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11&query=${req.params.food}`
       )
       .then(async (response) => {
-        await res.json(response.data);
+        res.json(response.data);
       })
       .catch((error) => console.error({ error: error }));
   })
@@ -30,8 +30,8 @@ router
       .get(
         `https://api.spoonacular.com/recipes/${req.params.id}/ingredientWidget.json?apiKey=724f1998bda24a498285eba50cd247fb`
       )
-      .then(async (response) => {
-        await res.json(response.data);
+      .then((response) => {
+        res.json(response.data);
       })
       .catch((error) => console.error({ error: error }));
   });
