@@ -1,15 +1,16 @@
 exports.up = function (knex) {
   return knex.schema.createTable("profile", function (table) {
     table.increments("id").primary();
-    table.string("username", 55).unique();
+    table.string("username");
     table.string("hash");
+    table.string("password");
     table.integer("user_id").unsigned();
     table
       .foreign("user_id")
       .references("id")
       .inTable("users")
-      .onUpdate()
-      .onDelete();
+      .onUpdate("CASCADE")
+      .onDelete("CASCADE");
   });
 };
 

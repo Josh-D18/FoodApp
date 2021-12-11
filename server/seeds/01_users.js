@@ -1,22 +1,22 @@
 const bcrypt = require("bcryptjs");
 let users = [
   {
-    firstname: "Josh",
-    lastname: "Date",
+    firstName: "Josh",
+    lastName: "Date",
     username: "CodeGuy",
-    password: bcrypt.hash("hello", 8),
+    password: bcrypt.hashSync("hello", 8),
   },
   {
-    firstname: "Jovin",
-    lastname: "Alexander",
+    firstName: "Jovin",
+    lastName: "Alexander",
     username: "Jalex",
-    password: bcrypt.hash("hello", 8),
+    password: bcrypt.hashSync("hello", 8),
   },
   {
-    firstname: "Mark",
-    lastname: "Zuck",
+    firstName: "Mark",
+    lastName: "Zuck",
     username: "Facebook",
-    password: bcrypt.hash("hello", 8),
+    password: bcrypt.hashSync("hello", 8),
   },
 ];
 exports.seed = function (knex) {
