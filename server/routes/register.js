@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const knex = require("../middleware/config");
 const { default: axios } = require("axios");
 const { parse, stringify, toJSON, fromJSON } = require("flatted");
+// var stringify = require("json-stringify-safe");
+// var isCircular = require("is-circular");
 // Create New User
 router.post("/register", async (req, res) => {
   let username = req.body.userName;
@@ -12,24 +14,32 @@ router.post("/register", async (req, res) => {
   let lastname = req.body.lastName;
   await bcrypt
     .hash(password, 8)
-    .then((hashPassword) => {
-      knex("users")
+    .then(async (hashPassword) => {
+      await knex("users")
         .insert({
           userName: username,
           password: hashPassword,
           firstName: firstname,
           lastName: lastname,
         })
-        .then((user) => {
-          knex("users")
+        .then(async (user) => {
+          await knex("users")
             .where({ id: user })
             .then(async (data) => {
-              let user = stringify(data[0]);
-              console.log(JSON.parse(user)[0]);
+              let obj = {
+                username: username,
+                firstname: firstname,
+                lastname: lastname,
+              };
+              // obj.firstName = data[0].username;
+              // obj.lastName = data[0].lastName;
+              // obj.username = data[0].username;
+
+              console.log(stringify(obj), obj);
               await axios
                 .post(
                   "https://api.spoonacular.com/users/connect?apiKey=724f1998bda24a498285eba50cd247fb",
-                  user[0]
+                  JSON.parse(obj[0])
                 )
                 .then((data) => res.send(data))
                 .catch((err) => res.status(400).send({ error: err.message }));
