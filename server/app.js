@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/", recipesRouter);
-// app.use("/", loginRouter);
+app.use("/", loginRouter);
 app.use("/", registerRouter);
 
 // catch 404 and forward to error handler

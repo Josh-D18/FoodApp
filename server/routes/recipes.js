@@ -1,6 +1,7 @@
 const { default: axios } = require("axios");
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
+const auth = require("../middleware/auth");
 
 /* GET users listing. */
 // &query=pizza&diet=Gluten Free

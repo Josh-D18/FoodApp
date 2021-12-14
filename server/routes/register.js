@@ -3,21 +3,33 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const knex = require("../middleware/config");
 const { default: axios } = require("axios");
-const { parse, stringify, toJSON, fromJSON } = require("flatted");
-// var stringify = require("json-stringify-safe");
-// var isCircular = require("is-circular");
+
 // Create New User
 router.post("/register", async (req, res) => {
-  let username = req.body.userName;
+  let username = req.body.username;
   let password = req.body.password;
   let firstname = req.body.firstName;
   let lastname = req.body.lastName;
+  let profileObj = [];
+
+  await axios
+    .post(
+      "https://api.spoonacular.com/users/connect?apiKey=724f1998bda24a498285eba50cd247fb",
+      JSON.stringify({
+        userName: username,
+        firstName: firstname,
+        lastName: lastname,
+      })
+    )
+    .then((data) => profileObj.push(data))
+    .catch((err) => res.status(400).send({ error: err.message }));
+
   await bcrypt
     .hash(password, 8)
     .then(async (hashPassword) => {
       await knex("users")
         .insert({
-          userName: username,
+          username: username,
           password: hashPassword,
           firstName: firstname,
           lastName: lastname,
@@ -25,24 +37,17 @@ router.post("/register", async (req, res) => {
         .then(async (user) => {
           await knex("users")
             .where({ id: user })
-            .then(async (data) => {
-              let obj = {
-                username: username,
-                firstname: firstname,
-                lastname: lastname,
-              };
-              // obj.firstName = data[0].username;
-              // obj.lastName = data[0].lastName;
-              // obj.username = data[0].username;
-
-              console.log(stringify(obj), obj);
-              await axios
-                .post(
-                  "https://api.spoonacular.com/users/connect?apiKey=724f1998bda24a498285eba50cd247fb",
-                  JSON.parse(obj[0])
-                )
-                .then((data) => res.send(data))
-                .catch((err) => res.status(400).send({ error: err.message }));
+            .then(async () => {
+              await knex("profile")
+                .insert({
+                  user_id: user,
+                  username: profileObj[0].data.username,
+                  password: profileObj[0].data.spoonacularPassword,
+                  hash: profileObj[0].data.hash,
+                })
+                .then((profile) => {
+                  res.json(profile);
+                });
             });
         })
         .catch((err) => res.status(400).send({ error: err.message }));
