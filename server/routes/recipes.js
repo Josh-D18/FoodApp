@@ -17,7 +17,7 @@ router
       .then((response) => {
         res.json(response.data);
       })
-      .catch((error) => console.error(error));
+      .catch((err) => res.status(400).send({ error: err.message }));
   })
   .get(
     "/recipes/:food/:diet?/:intolerances?/:type?/:sort?",
@@ -29,7 +29,7 @@ router
         .then((response) => {
           res.json(response.data);
         })
-        .catch((error) => console.error({ error: error }));
+        .catch((err) => res.status(400).send({ error: err.message }));
     }
   )
   .get("/recipes/:id", async (req, res, next) => {
@@ -40,7 +40,7 @@ router
       .then((response) => {
         res.json(response.data);
       })
-      .catch((error) => console.error({ error: error }));
+      .catch((err) => res.status(400).send({ error: err.message }));
   });
 
 module.exports = router;
