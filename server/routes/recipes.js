@@ -5,31 +5,37 @@ const auth = require("../middleware/auth");
 
 /* GET users listing. */
 // &query=pizza&diet=Gluten Free
+// Random Recipes
+// https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert
+
 router
   .get("/recipes", async (req, res, next) => {
     await axios
       .get(
-        "https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11&maxFat=25"
+        "https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11"
       )
-      .then(async (response) => {
+      .then((response) => {
         res.json(response.data);
       })
       .catch((error) => console.error(error));
   })
-  .get("/recipes/:food", async (req, res, next) => {
+  .get(
+    "/recipes/:food/:diet?/:intolerances?/:type?/:sort?",
+    async (req, res, next) => {
+      await axios
+        .get(
+          `https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11&query=${req.params.food}&diet=${req.params.diet}&intolerances=${req.params.intolerances}&type=${req.params.type}&sort=${req.params.sort}`
+        )
+        .then((response) => {
+          res.json(response.data);
+        })
+        .catch((error) => console.error({ error: error }));
+    }
+  )
+  .get("/recipes/:id", async (req, res, next) => {
     await axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11&query=${req.params.food}`
-      )
-      .then(async (response) => {
-        res.json(response.data);
-      })
-      .catch((error) => console.error({ error: error }));
-  })
-  .get("/ingredients/:id", async (req, res, next) => {
-    await axios
-      .get(
-        `https://api.spoonacular.com/recipes/${req.params.id}/ingredientWidget.json?apiKey=724f1998bda24a498285eba50cd247fb`
+        `https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=724f1998bda24a498285eba50cd247fb&includeNutrition=false`
       )
       .then((response) => {
         res.json(response.data);

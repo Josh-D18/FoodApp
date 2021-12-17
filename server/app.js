@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 require("dotenv").config();
-var indexRouter = require("./routes/index");
+var shoppingcartRouter = require("./routes/shoppingcart");
 var recipesRouter = require("./routes/recipes");
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/", shoppingcartRouter);
 app.use("/", recipesRouter);
 app.use("/", loginRouter);
 app.use("/", registerRouter);
