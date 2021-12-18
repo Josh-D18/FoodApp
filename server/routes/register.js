@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const knex = require("../middleware/config");
 const { default: axios } = require("axios");
+const apiKey = require("../middleware/configapi");
 
 // Create New User
 router.post("/register", async (req, res) => {
@@ -14,7 +15,7 @@ router.post("/register", async (req, res) => {
 
   await axios
     .post(
-      "https://api.spoonacular.com/users/connect?apiKey=724f1998bda24a498285eba50cd247fb",
+      `https://api.spoonacular.com/users/connect?apiKey=${apiKey}`,
       JSON.stringify({
         userName: username,
         firstName: firstname,

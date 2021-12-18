@@ -2,6 +2,7 @@ const { default: axios } = require("axios");
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
+const apiKey = require("../middleware/configapi");
 
 /* GET users listing. */
 // &query=pizza&diet=Gluten Free
@@ -12,7 +13,7 @@ router
   .get("/recipes", async (req, res, next) => {
     await axios
       .get(
-        "https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11"
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=11`
       )
       .then((response) => {
         res.json(response.data);
@@ -24,7 +25,7 @@ router
     async (req, res, next) => {
       await axios
         .get(
-          `https://api.spoonacular.com/recipes/complexSearch?apiKey=724f1998bda24a498285eba50cd247fb&number=11&query=${req.params.food}&diet=${req.params.diet}&intolerances=${req.params.intolerances}&type=${req.params.type}&sort=${req.params.sort}`
+          `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=11&query=${req.params.food}&diet=${req.params.diet}&intolerances=${req.params.intolerances}&type=${req.params.type}&sort=${req.params.sort}`
         )
         .then((response) => {
           res.json(response.data);
@@ -35,7 +36,7 @@ router
   .get("/recipes/:id", async (req, res, next) => {
     await axios
       .get(
-        `https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=724f1998bda24a498285eba50cd247fb&includeNutrition=false`
+        `https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${apiKey}&includeNutrition=false`
       )
       .then((response) => {
         res.json(response.data);
