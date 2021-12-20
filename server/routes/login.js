@@ -11,7 +11,6 @@ router.post("/login", (req, res, next) => {
   knex("users")
     .where({ username: username })
     .then((user) => {
-      console.log(password, user);
       const isMatch = bcrypt.compareSync(password, user[0].password);
       if (!isMatch) {
         return res.status(400).json({ error: "Invalid credentials" });

@@ -22,12 +22,11 @@ router.get("/shoppingcart/:username/:hash", async (req, res, next) => {
 // Post to shopping cart
 // https://api.spoonacular.com/mealplanner/95532f98-7941-4c80-9a93-2fcddd8ef676/shopping-list/items?apiKey=724f1998bda24a498285eba50cd247fb&hash=e7e9228b49a4652aafaf8d7fb949fa5756ea0923
 
-router.post("/shoppingcart/:username/:hash", function (req, res, next) {
+router.post("/shoppingcart/:username/:hash", async (req, res, next) => {
   let item = req.body.item;
-  let parse = req.body.parse;
-  axios
+  await axios
     .post(
-      `https://api.spoonacular.com/mealplanner/${req.params.username}/shopping-list?apiKey=${apiKey}&hash=${req.params.hash}`,
+      `https://api.spoonacular.com/mealplanner/${req.params.username}/shopping-list/items?apiKey=${apiKey}&hash=${req.params.hash}`,
       {
         item,
       }
@@ -35,7 +34,32 @@ router.post("/shoppingcart/:username/:hash", function (req, res, next) {
     .then((response) => {
       res.json(response.data);
     })
-    .catch((err) => res.status(400).send({ error: err.message }));
+    .catch((err) =>
+      res.status(400).send({ error: err.message, msg: req.params.username })
+    );
+});
+
+// Post entire List to Shopping Cart
+router.post("/shoppingcart/:username/:hash/all", async (req, res, next) => {
+  let item = req.body.item;
+  let itemsArr = ["apples", "pears", "chicken", "curry", "potatos"];
+
+  for (let i = 0; i < itemsArr.length; i++) {
+    await axios
+      .post(
+        `https://api.spoonacular.com/mealplanner/${req.params.username}/shopping-list/items?apiKey=${apiKey}&hash=${req.params.hash}`,
+        {
+          item: itemsArr[i],
+        }
+      )
+      .then(() => {
+        return;
+      })
+      .catch((err) =>
+        res.status(400).send({ error: err.message, msg: req.params.username })
+      );
+  }
+  res.send("All Items Have Been Added!");
 });
 
 // Delete Shopping Cart item
