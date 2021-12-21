@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const knex = require("../middleware/config");
 const { default: axios } = require("axios");
 const apiKey = require("../middleware/configapi");
+const { check } = require("express-validator");
 
 // Create New User
 router.post("/register", async (req, res) => {
@@ -12,6 +13,12 @@ router.post("/register", async (req, res) => {
   let firstname = req.body.firstName;
   let lastname = req.body.lastName;
   let profileObj = [];
+
+  // if (password) {
+  //   check(password)
+  //     .isLength({ min: 5 })
+  //     .withMessage("must be at least 5 chars long");
+  // }
 
   await axios
     .post(
