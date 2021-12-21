@@ -1,8 +1,10 @@
 import { RecipeContext } from "../Context";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 function RecipesPage() {
-  //   const { actions } = useContext(RecipeContext);
+  // const { actions } = useContext(RecipeContext);
   console.log(RecipeContext);
   const [recipe, setRecipe] = useState([]);
 
@@ -15,7 +17,8 @@ function RecipesPage() {
       }
       fetchData();
     };
-  }, [recipe]);
+    getData();
+  }, []);
 
   return (
     <article>
@@ -23,8 +26,11 @@ function RecipesPage() {
       <>
         {recipe.map((item) => (
           <div key={item.id}>
-            <h2>{item.title}</h2>
-            <img src={item.image} alt="Recipe" />
+            <Link to={`/recipes/${item.id}`}>
+              <h2>{item.title}</h2>
+
+              <img src={item.image} alt="Recipe" />
+            </Link>
           </div>
         ))}
       </>
