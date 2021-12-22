@@ -34,7 +34,6 @@ router
     }
   )
   .get("/recipe/:id", async (req, res, next) => {
-    console.log(req.params.id);
     await axios
       .get(
         `https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${apiKey}&includeNutrition=false`
