@@ -40,8 +40,7 @@ router.post("/shoppingcart/:username/:hash", async (req, res, next) => {
 
 // Post entire List to Shopping Cart
 router.post("/shoppingcart/:username/:hash/all", async (req, res, next) => {
-  let item = req.body.item;
-  let itemsArr = ["apples", "pears", "chicken", "curry", "potatos"];
+  let itemsArr = req.body.items;
 
   for (let i = 0; i < itemsArr.length; i++) {
     await axios

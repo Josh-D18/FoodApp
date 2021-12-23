@@ -4,8 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 function RecipesPage() {
-  // const { actions } = useContext(RecipeContext);
-  console.log(RecipeContext);
+  const { actions } = useContext(RecipeContext);
+  console.log(actions);
   const [recipe, setRecipe] = useState([]);
 
   useEffect(() => {
