@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default function AddIngredientButton({ ingredients }) {
   const ingredientsArr = [];
+
   const getIngredients = () => {
     ingredients && ingredients.map((food) => ingredientsArr.push(food.name));
   };

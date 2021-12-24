@@ -1,11 +1,9 @@
-import { RecipeContext } from "../Context";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import AddIngredientButton from "../AddIngredients/AddIngredients";
 
 function RecipePage() {
-  // const { actions } = useContext(RecipeContext);
   const [recipe, setRecipe] = useState([]);
   let { id } = useParams();
 
@@ -13,7 +11,6 @@ function RecipePage() {
     const getData = () => {
       async function fetchData() {
         await axios(`http://localhost:5000/recipe/${id}`).then((res) => {
-          console.log(res.data);
           setRecipe(res.data);
         });
       }
