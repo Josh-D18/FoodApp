@@ -12,10 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<RecipesPage />} />
           <Route path="/recipes/:id" element={<RecipePage />} />
-          <Route
-            path="/shoppingcart/:username/:hash"
-            element={<ShoppingCart />}
-          />
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
         </Routes>
       </Provider>
     </section>

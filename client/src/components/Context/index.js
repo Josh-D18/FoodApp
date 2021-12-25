@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 export const RecipeContext = createContext();
@@ -9,24 +9,20 @@ export const Provider = (props) => {
   // const [recipe, setRecipe] = useState([]);
   // const { id } = useParams();
 
-  console.log(props);
-  // const getCurrentUser = async () => {
-  //   await axios.get(`http://localhost:5000/user/${id}`).then((res) => {
-  //     setUser(res.data);
-  //     console.log(user);
-  //   });
-  // };
-
   const getCurrentUser = () => {
     async function fetchData() {
-      await axios(`http://localhost:5000/user/1`).then((res) => {
+      await axios(`http://localhost:5000/user/116`).then((res) => {
         setUser(res.data);
+        return res.data;
       });
     }
     fetchData();
   };
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
-  return (
+  return user ? (
     <RecipeContext.Provider
       value={{
         actions: {
@@ -37,5 +33,7 @@ export const Provider = (props) => {
     >
       {props.children}
     </RecipeContext.Provider>
+  ) : (
+    ""
   );
 };
