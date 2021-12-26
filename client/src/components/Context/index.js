@@ -5,35 +5,28 @@ export const RecipeContext = createContext();
 
 export const Provider = (props) => {
   // State to hold API data
-  const [user, setUser] = useState([]);
+
   // const [recipe, setRecipe] = useState([]);
   // const { id } = useParams();
 
-  const getCurrentUser = () => {
-    async function fetchData() {
-      await axios(`http://localhost:5000/user/116`).then((res) => {
-        setUser(res.data);
-        return res.data;
-      });
-    }
-    fetchData();
-  };
+  async function fetchUserData() {
+    await axios(`http://localhost:5000/user/116`).then((res) => {
+      return res.data;
+    });
+  }
   useEffect(() => {
-    getCurrentUser();
+    fetchUserData();
   }, []);
 
-  return user ? (
+  return (
     <RecipeContext.Provider
       value={{
         actions: {
-          data: getCurrentUser,
-          user: user,
+          data: fetchUserData,
         },
       }}
     >
       {props.children}
     </RecipeContext.Provider>
-  ) : (
-    ""
   );
 };

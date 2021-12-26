@@ -5,37 +5,36 @@ import { RecipeContext } from "../Context";
 
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
-  const [storeUser, setStoreUser] = useState([]);
+  const [user, setUser] = useState([]);
   const { actions } = useContext(RecipeContext);
-  const user = actions.user;
 
-  const getUser = (user) => {
-    const data = actions.data();
-    // const username = data.username;
-    // const hash = data.hash;
-    console.log(data);
-    // if ((username, hash)) {
-    //   setStoreUser([username, hash]);
-    // } else {
-    //   new Error("User Not Found");
-    // }
-  };
+  async function fetchUserData() {
+    await axios(`http://localhost:5000/user/116`).then((res) => {
+      setUser(res.data);
+    });
+  }
 
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
-        getUser(user);
-        console.log(storeUser);
-        await axios(
-          `http://localhost:5000/shoppingcart/${storeUser[0]}/${storeUser[1]}`
-        ).then((res) => {
-          setCart(res.data);
-        });
+        try {
+          await fetchUserData();
+
+          await axios(
+            `http://localhost:5000/shoppingcart/${user[0].username}/${user[0].hash}`
+          ).then((res) => {
+            setCart(res.data);
+          });
+        } catch (e) {
+          console.log(e);
+        }
       }
       fetchData();
     };
     getData();
   }, []);
+
+  console.log(user, cart);
 
   return (
     <div>
