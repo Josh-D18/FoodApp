@@ -4,6 +4,7 @@ import RecipesPage from "./components/RecipesPage/RecipesPage";
 import RecipePage from "./components/RecipePage/RecipePage";
 import { Provider } from "./components/Context/index";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<RecipesPage />} />
           <Route path="/recipes/:id" element={<RecipePage />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Provider>
     </section>

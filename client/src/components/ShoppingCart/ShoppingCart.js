@@ -1,50 +1,35 @@
 import axios from "axios";
-// import { useParams } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
-import { RecipeContext } from "../Context";
+import { useState, useEffect } from "react";
 
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  // const { actions } = useContext(RecipeContext);
 
-  async function fetchUserData() {
-    await axios(`http://localhost:5000/user/116`).then((res) => {
-      setUser(res.data);
-      setIsLoading(true);
-    });
-  }
+  let username = sessionStorage.getItem("username");
+  let hash = sessionStorage.getItem("hash");
 
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
-        await fetchUserData();
-        if (isLoading) {
-          if (cart) {
-            await axios(
-              `http://localhost:5000/shoppingcart/${user[0].username}/${user[0].hash}`
-            )
-              .then((res) => {
-                console.log(res.data);
-                setCart(res.data);
-              })
-              .catch((err) => console.log({ message: err }));
-          }
-        }
+        await axios(`http://localhost:5000/shoppingcart/${username}/${hash}`)
+          .then((res) => {
+            setCart(res.data);
+          })
+          .catch((err) => console.log({ message: err }));
       }
       fetchData();
     };
     getData();
-  }, []);
+  }, [username, hash]);
 
-  console.log(user, cart, isLoading, cart === false);
-
+  // console.log(cart, username, hash);
   return (
     <div>
+      {" "}
       <h1>Shopping Cart</h1>
-
-      {cart && cart !== [] && [cart].map((items) => console.log(items))}
+      {cart &&
+        [cart].map((items) => {
+          return items && [items.aisles].map((item) => console.log(item));
+        })}
     </div>
   );
 }
