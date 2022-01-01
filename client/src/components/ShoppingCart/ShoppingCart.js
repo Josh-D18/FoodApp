@@ -1,15 +1,18 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import SendEmail from "../Email/SendEmail";
 import { RecipeContext } from "../Context";
 
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
-
+  const { actions } = useContext(RecipeContext);
+  console.log(actions);
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
-        await axios(`http://localhost:5000/shoppingcart/${username}/${hash}`)
+        await axios(
+          `http://localhost:5000/shoppingcart/${actions.data.username}/${actions.data.hash}`
+        )
           .then((res) => {
             setCart(res.data);
           })
@@ -18,7 +21,7 @@ export default function ShoppingCart() {
       fetchData();
     };
     getData();
-  }, [username, hash]);
+  }, [actions.data.username, actions.data.hash]);
 
   return (
     <>
