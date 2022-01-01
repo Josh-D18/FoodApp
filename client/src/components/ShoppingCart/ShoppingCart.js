@@ -6,7 +6,7 @@ import { RecipeContext } from "../Context";
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
   const { actions } = useContext(RecipeContext);
-  console.log(actions);
+
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
