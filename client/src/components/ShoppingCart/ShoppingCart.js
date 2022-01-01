@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import SendEmail from "../Email/SendEmail";
+import { RecipeContext } from "../Context";
 
 export default function ShoppingCart() {
   const [cart, setCart] = useState([]);
-
-  let username = sessionStorage.getItem("username");
-  let hash = sessionStorage.getItem("hash");
 
   useEffect(() => {
     const getData = () => {
@@ -21,18 +20,34 @@ export default function ShoppingCart() {
     getData();
   }, [username, hash]);
 
-  // console.log(cart, username, hash);
   return (
-    <div>
-      {" "}
+    <>
       <h1>Shopping Cart</h1>
-      {cart &&
-        [cart].map((items) => {
-          return items && [items.aisles].map((item) => console.log(item));
-        })}
-    </div>
+      {cart ? (
+        [cart].map(
+          (items) =>
+            items &&
+            [items.aisles].map((item) =>
+              item.map((i) => (
+                <div key={i.id}>
+                  <h2>Aisle: {i.aisle}</h2>
+                  {i.items.map((item) => (
+                    <>
+                      <h2>{item.name}</h2>
+                      <p>
+                        Servings: {item.measures.original.amount}{" "}
+                        {item.measures.original.unit}
+                      </p>
+                    </>
+                  ))}
+                </div>
+              ))
+            )
+        )
+      ) : (
+        <h2>Your Shopping Cart Is Empty!</h2>
+      )}
+      {cart ? <SendEmail /> : ""}
+    </>
   );
 }
-// items.aisles.map((item) => {
-//   return <h3>{item.aisles}</h3>;
-// })

@@ -1,16 +1,11 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import AddIngredientButton from "../AddIngredients/AddIngredients";
-import { RecipeContext } from "../Context";
 
 function RecipePage() {
   const [recipe, setRecipe] = useState([]);
   let { id } = useParams();
-  // const { actions } = useContext(RecipeContext);
-  // const user = actions.user;
-  // const { username, hash } = user[0];
-  // console.log(username, hash);
 
   useEffect(() => {
     const getData = () => {

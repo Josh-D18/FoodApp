@@ -1,10 +1,8 @@
-import { RecipeContext } from "../Context";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 function RecipesPage() {
-  const { actions } = useContext(RecipeContext);
   const [recipe, setRecipe] = useState([]);
 
   useEffect(() => {
