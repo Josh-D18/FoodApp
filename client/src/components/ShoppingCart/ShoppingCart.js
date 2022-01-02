@@ -10,9 +10,15 @@ export default function ShoppingCart() {
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
-        await axios(
-          `http://localhost:5000/shoppingcart/${actions.data.username}/${actions.data.hash}`
-        )
+        await axios
+          .get(
+            `http://localhost:5000/shoppingcart/${actions.data.username}/${actions.data.hash}`,
+            {
+              headers: {
+                authorization: `Bearer ${sessionStorage.getItem("token")}`,
+              },
+            }
+          )
           .then((res) => {
             setCart(res.data);
           })

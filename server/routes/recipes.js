@@ -1,8 +1,8 @@
 const { default: axios } = require("axios");
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
 const apiKey = require("../middleware/configapi");
+const authorize = require("../middleware/auth");
 
 /* GET users listing. */
 // &query=pizza&diet=Gluten Free
@@ -10,7 +10,7 @@ const apiKey = require("../middleware/configapi");
 // https://api.spoonacular.com/recipes/random?number=1&tags=vegetarian,dessert
 
 router
-  .get("/recipes", async (req, res, next) => {
+  .get("/recipes", authorize, async (req, res, next) => {
     await axios
       .get(
         `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=11`
@@ -33,7 +33,7 @@ router
         .catch((err) => res.status(400).send({ error: err.message }));
     }
   )
-  .get("/recipe/:id", async (req, res, next) => {
+  .get("/recipe/:id", authorize, async (req, res, next) => {
     await axios
       .get(
         `https://api.spoonacular.com/recipes/${req.params.id}/information?apiKey=${apiKey}&includeNutrition=false`

@@ -10,7 +10,11 @@ function RecipePage() {
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
-        await axios(`http://localhost:5000/recipe/${id}`).then((res) => {
+        await axios(`http://localhost:5000/recipe/${id}`, {
+          headers: {
+            authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }).then((res) => {
           setRecipe(res.data);
         });
       }

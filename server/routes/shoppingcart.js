@@ -2,9 +2,6 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 const apiKey = require("../middleware/configapi");
-/* GET home page. */
-
-// knex("profile").where({ username: username });
 
 // Get shopping cart
 router.get("/shoppingcart/:username/:hash", async (req, res, next) => {
@@ -19,7 +16,6 @@ router.get("/shoppingcart/:username/:hash", async (req, res, next) => {
 });
 
 // Post to shopping cart
-// https://api.spoonacular.com/mealplanner/95532f98-7941-4c80-9a93-2fcddd8ef676/shopping-list/items?apiKey=724f1998bda24a498285eba50cd247fb&hash=e7e9228b49a4652aafaf8d7fb949fa5756ea0923
 
 router.post("/shoppingcart/:username/:hash", async (req, res, next) => {
   let item = req.body.item;

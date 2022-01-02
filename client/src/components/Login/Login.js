@@ -9,7 +9,6 @@ function Login() {
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    console.log(value);
     setValue((values) => ({ ...values, [name]: value }));
   };
 
@@ -27,7 +26,7 @@ function Login() {
             sessionStorage.setItem("username", res.data[0].username);
             sessionStorage.setItem("hash", res.data[0].hash);
             sessionStorage.setItem("id", res.data[0].user_id);
-            navigate("/shoppingcart");
+            navigate("/recipes");
           }
         );
       });

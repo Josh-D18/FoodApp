@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddIngredientButton({ ingredients }) {
   const ingredientsArr = [];
+  const navigate = useNavigate();
 
   const getIngredients = () => {
     ingredients && ingredients.map((food) => ingredientsArr.push(food.name));
@@ -16,7 +18,8 @@ export default function AddIngredientButton({ ingredients }) {
         { items: ingredientsArr }
       )
       .then((res) => {
-        console.log(res);
+        alert(res.data);
+        navigate("/shoppingcart");
       })
       .catch((error) => console.error(error));
   };
