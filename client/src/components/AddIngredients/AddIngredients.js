@@ -18,6 +18,9 @@ export default function AddIngredientButton({ ingredients }) {
         { items: ingredientsArr }
       )
       .then((res) => {
+        setTimeout((time) => {
+          console.log(time);
+        }, 4);
         alert(res.data);
         navigate("/shoppingcart");
       })

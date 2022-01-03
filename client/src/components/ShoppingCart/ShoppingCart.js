@@ -4,7 +4,7 @@ import SendEmail from "../Email/SendEmail";
 import { RecipeContext } from "../Context";
 
 export default function ShoppingCart() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState();
   const { actions } = useContext(RecipeContext);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function ShoppingCart() {
       ) : (
         <h2>Your Shopping Cart Is Empty!</h2>
       )}
-      {cart ? <SendEmail /> : ""}
+      {cart ? <SendEmail data={cart} /> : ""}
     </>
   );
 }
