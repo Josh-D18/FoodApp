@@ -5,6 +5,8 @@ import { RecipeContext } from "../Context";
 
 export default function ShoppingCart() {
   const [cart, setCart] = useState();
+  const [aisle, setAisle] = useState([]);
+  const [ingredientName, setIngredientName] = useState([]);
   const { actions } = useContext(RecipeContext);
 
   useEffect(() => {

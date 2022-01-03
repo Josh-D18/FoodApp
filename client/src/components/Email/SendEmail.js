@@ -4,6 +4,7 @@ import dataObj from "../../config/config";
 
 export default function SendEmail({ data }) {
   const form = useRef();
+  const emailText = ``;
   const SendEmailFunc = (e) => {
     e.preventDefault();
 
