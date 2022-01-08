@@ -33,20 +33,19 @@ function Login() {
         );
       })
       .catch((error) => {
-        console.log(error.response);
-        if (error.respone.status === 400) {
-          alert("Error With Request. Please Try Again Later!");
+        if (error.response.status === 400) {
+          alert(`${error.response.data.error}`);
         } else if (error.response.status === 500) {
-          alert("Something went wrong! Please Try Again Later!");
+          alert(`${error.response.data.error}`);
         }
       });
   };
 
   return (
     <>
-      <h2>Login</h2>
       <form onSubmit={handleSubmit(loginUser)}>
         <Container maxWidth="xs">
+          <h2>Login</h2>
           <Box mb={2} mt={14}>
             <TextField
               label="Name"

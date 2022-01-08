@@ -31,7 +31,6 @@ function RecipePage() {
           <article key={item.id} className="recipe">
             <PDF
               key={item.id}
-              id={item.id}
               ingredients={item.extendedIngredients}
               image={item.image}
               title={item.title}
@@ -43,7 +42,7 @@ function RecipePage() {
               <h3>Cuisine Type:</h3>
               <ul>
                 {item.cuisines && item.cuisines.length > 0 ? (
-                  item.cuisines.map((cuisine, i) => <li>{cuisine}</li>)
+                  item.cuisines.map((cuisine, i) => <li key={i}>{cuisine}</li>)
                 ) : (
                   <h4>None Where Found!</h4>
                 )}

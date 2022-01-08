@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import "./RecipesPage.scss";
 
 function RecipesPage() {
   const [recipe, setRecipe] = useState([]);
@@ -40,15 +41,15 @@ function RecipesPage() {
   }, [navigate]);
 
   return (
-    <article>
+    <article className="recipes">
       <h1>Recipes</h1>
       <>
         {recipe.map((item) => (
-          <div key={item.id}>
+          <div key={item.id} className="recipes__container">
             <Link to={`/recipes/${item.id}`}>
-              <h2>{item.title}</h2>
+              <h2 className="recipes__title">{item.title}</h2>
 
-              <img src={item.image} alt="Recipe" />
+              <img className="recipes__image" src={item.image} alt="Recipe" />
             </Link>
           </div>
         ))}
