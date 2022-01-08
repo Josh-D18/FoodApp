@@ -7,6 +7,7 @@ export default function PDF({
   title,
   readyIn,
   instructions,
+  id,
 }) {
   const ref = React.createRef();
 
@@ -15,7 +16,7 @@ export default function PDF({
       <ReactToPdf>
         {({ toPdf, targetRef }) => (
           <>
-            <div className="PDF" ref={ref} ref={targetRef}>
+            <div className="PDF" key={id} ref={ref} ref={targetRef}>
               <h1>{title}</h1>
               <img src={image} alt="Recipe" />
               <h3>Ingredients</h3>

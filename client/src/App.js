@@ -11,7 +11,7 @@ import Home from "./components/Home/Home";
 
 function App() {
   return (
-    <section>
+    <>
       <Provider>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -23,7 +23,7 @@ function App() {
           <Route exact path="*" component={NotFound} status={404} />
         </Routes>
       </Provider>
-    </section>
+    </>
   );
 }
 
