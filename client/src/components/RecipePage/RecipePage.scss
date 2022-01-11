@@ -1,0 +1,38 @@
+.recipe {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__servings {
+  }
+
+  &__title {
+  }
+
+  &__item {
+    list-style: none;
+  }
+
+  &__diets {
+  }
+
+  &__dishtypes {
+  }
+}
+
+.PDF {
+  &__ingredientsList {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    &-item {
+      padding: 1rem;
+    }
+  }
+}

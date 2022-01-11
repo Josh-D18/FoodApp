@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import PDF from "../PDF/PDF";
+import "./RecipePage.scss";
 
 function RecipePage() {
   const [recipe, setRecipe] = useState([]);
@@ -24,7 +25,7 @@ function RecipePage() {
   }, [id]);
 
   return (
-    <>
+    <section>
       <h1>Recipe</h1>
       {recipe &&
         [recipe].map((item) => (
@@ -37,24 +38,30 @@ function RecipePage() {
               readyIn={item.readyInMinutes}
               instructions={item.analyzedInstructions}
             />
-            <article className="recipe__cuisine">
-              <h3>Servings: {item.servings}</h3>
-              <h3>Cuisine Type:</h3>
-              <ul>
+            {/* <article className="recipe__container">
+              <h3 className="recipe__servings">Servings: {item.servings}</h3>
+              <h3 className="recipe__title">Cuisine Type</h3>
+              <>
                 {item.cuisines && item.cuisines.length > 0 ? (
-                  item.cuisines.map((cuisine, i) => <li key={i}>{cuisine}</li>)
+                  item.cuisines.map((cuisine, i) => (
+                    <li className="recipe__item" key={i}>
+                      {cuisine}
+                    </li>
+                  ))
                 ) : (
                   <h4>None Where Found!</h4>
                 )}
-              </ul>
-            </article>
-            <article className="recipes__diets">
+              </>
+            </article> */}
+            {/* <article className="recipe__container">
               <h3>Diets</h3>
               <>
                 {item.diets ? (
                   <ul>
                     {item.diets.map((diet, i) => (
-                      <li key={i}>{diet}</li>
+                      <li className="recipe__item" key={i}>
+                        {diet}
+                      </li>
                     ))}
                   </ul>
                 ) : (
@@ -62,16 +69,20 @@ function RecipePage() {
                 )}
               </>
             </article>
-            <article className="recipes__dishtypes">
+            <article className="recipe__container">
               <h3>Dish Types</h3>
-              <ul>
+              <>
                 {item.dishTypes &&
-                  item.dishTypes.map((dish, i) => <li key={i}>{dish}</li>)}
-              </ul>
-            </article>
+                  item.dishTypes.map((dish, i) => (
+                    <li className="recipe__item" key={i}>
+                      {dish}
+                    </li>
+                  ))}
+              </>
+            </article> */}
           </article>
         ))}
-    </>
+    </section>
   );
 }
 

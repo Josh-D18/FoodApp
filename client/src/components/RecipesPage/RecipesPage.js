@@ -45,13 +45,13 @@ function RecipesPage() {
       <h1>Recipes</h1>
       <>
         {recipe.map((item) => (
-          <div key={item.id} className="recipes__container">
-            <Link to={`/recipes/${item.id}`}>
+          <Link key={item.id} to={`/recipes/${item.id}`}>
+            <div className="recipes__container">
               <h2 className="recipes__title">{item.title}</h2>
 
               <img className="recipes__image" src={item.image} alt="Recipe" />
-            </Link>
-          </div>
+            </div>
+          </Link>
         ))}
       </>
     </article>

@@ -1,0 +1,22 @@
+@mixin displayFlexCol {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin mobileView {
+  @media #{$media-mobile} {
+    @content;
+  }
+}
+
+@mixin tabletView {
+  @media #{$media-tablet} {
+    @content;
+  }
+}
+
+@mixin desktopView {
+  @media #{$media-desktop} {
+    @content;
+  }
+}

@@ -43,8 +43,7 @@ export default function Home() {
           Welcome To Foodorzo!
         </h1>
         <p className="home__text">
-          Look/Search through diffeerent recipes and add them to your shopping
-          cart! Once You have all the ingredients, Send them to YOUR EMAIL!!
+          Search For Recispes and Download Them As PDF's!
         </p>
         <Button
           variant="contained"
