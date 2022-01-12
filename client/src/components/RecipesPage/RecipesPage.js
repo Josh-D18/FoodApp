@@ -43,6 +43,12 @@ function RecipesPage() {
   return (
     <article className="recipes">
       <h1>Recipes</h1>
+      <form>
+        <input placeholder="Enter Recipe" />
+        <option>
+          <select></select>
+        </option>
+      </form>
       <>
         {recipe.map((item) => (
           <Link key={item.id} to={`/recipes/${item.id}`}>

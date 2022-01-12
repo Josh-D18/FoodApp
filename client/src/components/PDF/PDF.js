@@ -10,12 +10,21 @@ export default function PDF({
   instructions,
 }) {
   const ref = React.createRef();
-
+  const options = {
+    orientation: "landscape",
+    unit: "in",
+    format: [4, 2],
+  };
   return (
-    <ReactToPdf>
+    <ReactToPdf options={options} x={0.5} y={0.5} scale={1}>
       {({ toPdf, targetRef }) => (
         <>
-          <div className="PDF" ref={ref} ref={targetRef}>
+          <div
+            className="PDF"
+            ref={ref}
+            ref={targetRef}
+            // style={{ height: 500 }}
+          >
             <h1>{title}</h1>
             <img sx={{ width: 500, height: 450 }} src={image} alt="Recipe" />
             <h3>Ingredients</h3>
@@ -29,7 +38,7 @@ export default function PDF({
                 : ""}
             </ul>
             <p>Can Be Ready In: {readyIn} Minutes</p>
-            <div>
+            <div className="PDF__instructions">
               {instructions && instructions.length > 0 ? (
                 <h3>Instructions</h3>
               ) : (

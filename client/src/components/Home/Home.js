@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import { Container, Box } from "@mui/material";
-import Image from "../../styles/images/homeimage.jpg";
+import Image from "../../assets/images/homeimage.jpg";
 import "./Home.scss";
 
 export default function Home() {

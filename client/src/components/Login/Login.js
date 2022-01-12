@@ -45,7 +45,7 @@ function Login() {
     <>
       <form onSubmit={handleSubmit(loginUser)}>
         <Container maxWidth="xs">
-          <h2>Login</h2>
+          <h2 className="login__title">Login</h2>
           <Box mb={2} mt={14}>
             <TextField
               label="Name"
