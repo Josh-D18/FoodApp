@@ -13,10 +13,10 @@ export default function PDF({
   const options = {
     orientation: "landscape",
     unit: "in",
-    format: [4, 2],
+    format: [17, 14],
   };
   return (
-    <ReactToPdf options={options} x={0.5} y={0.5} scale={1}>
+    <ReactToPdf options={options} x={0.8} y={0.8} scale={1}>
       {({ toPdf, targetRef }) => (
         <>
           <div

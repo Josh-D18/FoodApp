@@ -13,7 +13,7 @@ router
   .get("/recipes", authorize, async (req, res, next) => {
     await axios
       .get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=11`
+        `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=12`
       )
       .then((response) => {
         res.json(response.data);
