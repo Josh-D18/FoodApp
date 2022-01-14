@@ -13,7 +13,7 @@ export default function PDF({
   const options = {
     orientation: "landscape",
     unit: "in",
-    format: [17, 14],
+    format: [15, 17],
   };
   return (
     <ReactToPdf options={options} x={0.8} y={0.8} scale={1}>
@@ -23,21 +23,26 @@ export default function PDF({
             className="PDF"
             ref={ref}
             ref={targetRef}
+
             // style={{ height: 500 }}
           >
             <h1>{title}</h1>
-            <img sx={{ width: 500, height: 450 }} src={image} alt="Recipe" />
-            <h3>Ingredients</h3>
-            <ul className="PDF__ingredientsList">
-              {ingredients
-                ? ingredients.map((food, i) => (
-                    <li className="PDF__ingredientsList-item" key={i}>
-                      {food.name}
-                    </li>
-                  ))
-                : ""}
-            </ul>
-            <p>Can Be Ready In: {readyIn} Minutes</p>
+            <div className="PDF__ingredientsContainer">
+              <img src={image} alt="Recipe" />
+              <div className="PDF__ingredientsContainer-loopContainer">
+                <h3>Ingredients</h3>
+                <ul className="PDF__ingredientsList">
+                  {ingredients
+                    ? ingredients.map((food, i) => (
+                        <li className="PDF__ingredientsList-item" key={i}>
+                          {food.name}
+                        </li>
+                      ))
+                    : ""}
+                </ul>
+                <p>Can Be Ready In: {readyIn} Minutes</p>
+              </div>
+            </div>
             <div className="PDF__instructions">
               {instructions && instructions.length > 0 ? (
                 <h3>Instructions</h3>

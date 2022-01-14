@@ -6,7 +6,7 @@ import "./RecipePage.scss";
 import { useNavigate } from "react-router-dom";
 
 function RecipePage() {
-  const [recipe, setRecipe] = useState([]);
+  const [recipe, setRecipe] = useState();
   let { id } = useParams();
   const navigate = useNavigate();
 
@@ -43,11 +43,11 @@ function RecipePage() {
   }, [id, navigate]);
 
   return (
-    <section>
-      <h1>Recipe</h1>
+    <>
       {recipe &&
         [recipe].map((item) => (
           <article key={item.id} className="recipe">
+            <h1>Recipe</h1>
             <PDF
               key={item.id}
               ingredients={item.extendedIngredients}
@@ -100,7 +100,7 @@ function RecipePage() {
             </article> */}
           </article>
         ))}
-    </section>
+    </>
   );
 }
 

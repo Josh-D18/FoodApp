@@ -1,5 +1,5 @@
 .recipes {
-  // background-color: #242625;
+  background-color: aliceblue;
   &__food {
     display: flex;
     flex-direction: row;
@@ -20,7 +20,7 @@
     background: #fff;
     // color: $input-text-color;
     font: inherit;
-    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 10px 0 rgba(0, 0, 0, 0.1);
     border: 0;
     outline: 0;
     padding: 22px 18px;
@@ -32,6 +32,7 @@
     text-align: center;
     margin-right: 32px;
     margin-left: 32px;
+    margin-top: -18px;
   }
 
   &__title {

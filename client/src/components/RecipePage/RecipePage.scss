@@ -1,4 +1,9 @@
 .recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: aliceblue;
+  height: 100vh;
   &__container {
     display: flex;
     flex-direction: column;
@@ -23,9 +28,10 @@
 }
 
 .PDF {
-  // display: flex;
-  // flex-direction: column;
-  // align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: aliceblue;
   &__ingredientsList {
     display: flex;
     flex-wrap: wrap;
@@ -36,12 +42,32 @@
 
     &-item {
       padding: 1rem;
+      transition: 0.3s all ease-in-out;
+      &:hover {
+        font-size: 20px;
+      }
     }
   }
+
+  &-instructionsItem {
+  }
+
   &__instructions {
-    // display: flex;
-    // flex-direction: column;
-    // align-items: center;
-    // margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  &__ingredientsContainer {
+    display: flex;
+    margin: 2rem;
+  }
+
+  &__ingredientsContainer-loopContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
 }
