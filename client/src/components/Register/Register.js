@@ -20,15 +20,17 @@ export default function Register() {
       .post(`http://localhost:5000/register`, {
         username: data.username,
         password: data.password,
-        firstname: data.firstName,
-        lastname: data.lastName,
+        firstName: data.firstName,
+        lastName: data.lastName,
       })
       .then(async () => {
         navigate("/login");
       })
       .catch((error) => {
         if (error.response.status === 400) {
-          alert(`${error.response.data.error}`);
+          alert(
+            `Error Please Check Your Username or Last Name. They may have already been taken!`
+          );
         } else if (error.response.status === 500) {
           alert(`${error.response.data.error}`);
         }
@@ -78,7 +80,7 @@ export default function Register() {
             variant="outlined"
             color="secondary"
             fullWidth
-            {...register("firstname", {
+            {...register("firstName", {
               required: "Please Enter Your firstname",
               maxLength: 15,
             })}
@@ -94,7 +96,7 @@ export default function Register() {
             color="secondary"
             fullWidth
             placeholder="Last Name"
-            {...register("lastname", {
+            {...register("lastName", {
               required: "Please Enter Your lastname",
               maxLength: 15,
             })}
