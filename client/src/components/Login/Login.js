@@ -94,9 +94,14 @@ function Login() {
             </Button>
           </Box>
           <Box>
-            {/* <Button variant="outlined" color="secondary" size="small">
-              Delete
-            </Button> */}
+            <Button
+              variant="outlined"
+              color="secondary"
+              size="small"
+              onClick={() => navigate("/register")}
+            >
+              Sign Up
+            </Button>
           </Box>
         </Container>
       </form>
