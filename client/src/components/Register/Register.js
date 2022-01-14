@@ -1,7 +1,13 @@
 import { useForm } from "react-hook-form";
-// import axios from "axios";
+import TextField from "@mui/material/TextField";
+import { Container } from "@mui/material";
+import { Button } from "@mui/material";
+import { Box } from "@mui/system";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -9,20 +15,120 @@ export default function Register() {
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        placeholder="Name"
-        fullWidth
-        {...register("name", {
-          required: "Please Enter Your Name",
-          maxLength: 20,
-        })}
-        error={!!errors?.name}
-        helperText={errors?.name ? errors.name.message : null}
-      />
+  const loginUser = async (data) => {
+    await axios
+      .post(`http://localhost:5000/register`, {
+        username: data.username,
+        password: data.password,
+        firstname: data.firstName,
+        lastname: data.lastName,
+      })
+      .then(async () => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        if (error.response.status === 400) {
+          alert(`${error.response.data.error}`);
+        } else if (error.response.status === 500) {
+          alert(`${error.response.data.error}`);
+        }
+      });
+  };
 
-      <input type="submit" />
+  return (
+    <form onSubmit={handleSubmit(loginUser)}>
+      <Container maxWidth="xs">
+        <h2 className="login__title">Sign Up</h2>
+        <Box mb={2} mt={14}>
+          <TextField
+            label="Username"
+            variant="outlined"
+            color="secondary"
+            placeholder="Name"
+            fullWidth
+            {...register("username", {
+              required: "Please Enter Your Name",
+              maxLength: 20,
+            })}
+            error={!!errors?.username}
+            helperText={errors?.username ? errors.username.message : null}
+          />
+        </Box>
+
+        <Box mb={2} mt={2}>
+          <TextField
+            label="Password"
+            variant="outlined"
+            color="secondary"
+            type={"password"}
+            fullWidth
+            placeholder="Password"
+            {...register("password", {
+              required: "Please Enter Your Password",
+              maxLength: 20,
+            })}
+            error={!!errors?.password}
+            helperText={errors?.password ? errors.password.message : null}
+          />
+        </Box>
+
+        <Box mb={2} mt={2}>
+          <TextField
+            label="First Name"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            {...register("firstname", {
+              required: "Please Enter Your firstname",
+              maxLength: 15,
+            })}
+            error={!!errors?.firstname}
+            helperText={errors?.firstname ? errors.firstname.message : null}
+          />
+        </Box>
+
+        <Box mb={2} mt={2}>
+          <TextField
+            label="Last Name"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            placeholder="Last Name"
+            {...register("lastname", {
+              required: "Please Enter Your lastname",
+              maxLength: 15,
+            })}
+            error={!!errors?.lastname}
+            helperText={errors?.lastname ? errors.lastname.message : null}
+          />
+        </Box>
+        <Box>
+          <Button
+            sx={{
+              backgroundColor: "#62ee",
+            }}
+            variant="contained"
+            color="secondary"
+            type="submit"
+            size="small"
+          >
+            Sign Up
+          </Button>
+        </Box>
+        <Box>
+          <Button
+            sx={{
+              backgroundColor: "#62ee",
+            }}
+            variant="contained"
+            color="secondary"
+            type="submit"
+            size="small"
+          >
+            Login
+          </Button>
+        </Box>
+      </Container>
     </form>
   );
 }
