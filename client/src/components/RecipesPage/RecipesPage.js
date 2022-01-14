@@ -47,7 +47,7 @@ function RecipesPage() {
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
-        await axios("http://localhost:5000/recipes", {
+        await axios("${url}/recipes", {
           headers: {
             authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },
