@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./RecipesPage.scss";
 import { Container } from "@mui/material";
 import { Button } from "@mui/material";
-const url = "https://serverfoodapp.herokuapp.com";
+import url from "../../config/config";
 
 function RecipesPage() {
   const [recipe, setRecipe] = useState([]);

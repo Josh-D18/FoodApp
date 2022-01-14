@@ -18,10 +18,9 @@ export default function PDF({
   return (
     <ReactToPdf options={options} x={0.8} y={0.8} scale={1}>
       {({ toPdf, targetRef }) => (
-        <>
+        <div ref={ref}>
           <div
             className="PDF"
-            ref={ref}
             ref={targetRef}
 
             // style={{ height: 500 }}
@@ -68,7 +67,7 @@ export default function PDF({
               </Button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </ReactToPdf>
   );

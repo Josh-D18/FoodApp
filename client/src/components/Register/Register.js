@@ -13,7 +13,6 @@ export default function Register() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
 
   const loginUser = async (data) => {
     await axios

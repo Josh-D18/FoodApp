@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import PDF from "../PDF/PDF";
 import "./RecipePage.scss";
 import { useNavigate } from "react-router-dom";
-const url = "https://serverfoodapp.herokuapp.com";
+import url from "../../config/config";
 
 function RecipePage() {
   const [recipe, setRecipe] = useState();

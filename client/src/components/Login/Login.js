@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-const url = "https://serverfoodapp.herokuapp.com";
+import url from "../../config/config";
 
 function Login() {
   const navigate = useNavigate();
