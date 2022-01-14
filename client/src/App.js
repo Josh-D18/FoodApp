@@ -17,7 +17,7 @@ function App() {
           <Route path="/recipes" element={<RecipesPage />} />
           <Route path="/recipes/:id" element={<RecipePage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="/register" element={<Register />} />
           <Route exact path="*" component={NotFound} status={404} />
         </Routes>
       </Provider>
