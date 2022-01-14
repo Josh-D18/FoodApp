@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "develop": "nodemon ./bin/www",
+    "migrate": "knex migrate:latest",
+    "seed": "knex seed:run"
   },
   "cors": "http://localhost:3000",
   "dependencies": {
