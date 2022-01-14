@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import PDF from "../PDF/PDF";
 import "./RecipePage.scss";
 import { useNavigate } from "react-router-dom";
+const url = "https://serverfoodapp.herokuapp.com";
 
 function RecipePage() {
   const [recipe, setRecipe] = useState();
@@ -13,7 +14,7 @@ function RecipePage() {
   useEffect(() => {
     const getData = () => {
       async function fetchData() {
-        await axios(`http://localhost:5000/recipe/${id}`, {
+        await axios(`${url}/recipe/${id}`, {
           headers: {
             authorization: `Bearer ${sessionStorage.getItem("token")}`,
           },

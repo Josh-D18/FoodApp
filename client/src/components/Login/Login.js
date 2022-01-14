@@ -5,6 +5,7 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const url = "https://serverfoodapp.herokuapp.com";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function Login() {
 
   const loginUser = (data) => {
     axios
-      .post(`http://localhost:5000/login`, {
+      .post(`${url}/login`, {
         username: data.username,
         password: data.password,
       })

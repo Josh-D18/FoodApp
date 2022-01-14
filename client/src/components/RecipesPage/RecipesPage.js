@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./RecipesPage.scss";
 import { Container } from "@mui/material";
 import { Button } from "@mui/material";
+const url = "https://serverfoodapp.herokuapp.com";
 
 function RecipesPage() {
   const [recipe, setRecipe] = useState([]);
@@ -17,7 +18,7 @@ function RecipesPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios(
-      `http://localhost:5000/recipes/${newRecipe}/${diet}?/${intolerances}?/${type}?`,
+      `${url}/recipes/${newRecipe}/${diet}?/${intolerances}?/${type}?`,
       {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("token")}`,

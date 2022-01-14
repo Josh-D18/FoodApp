@@ -5,7 +5,7 @@ import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+const url = "https://serverfoodapp.herokuapp.com";
 export default function Register() {
   const navigate = useNavigate();
   const {
@@ -17,7 +17,7 @@ export default function Register() {
 
   const loginUser = async (data) => {
     await axios
-      .post(`http://localhost:5000/register`, {
+      .post(`${url}/register`, {
         username: data.username,
         password: data.password,
         firstName: data.firstName,
