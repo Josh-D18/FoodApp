@@ -23,19 +23,20 @@ function Login() {
         password: data.password,
       })
       .then(async (res) => {
+        console.log(res);
         sessionStorage.setItem("token", res.data.token);
-        await axios(`http://localhost:5000/user/${res.data.user[0].id}`).then(
-          (res) => {
-            sessionStorage.setItem("username", res.data[0].username);
-            sessionStorage.setItem("hash", res.data[0].hash);
-            sessionStorage.setItem("id", res.data[0].user_id);
-            navigate("/recipes");
-          }
-        );
+        await axios(`${url}/user/${res.data.user[0].id}`).then((res) => {
+          sessionStorage.setItem("username", res.data[0].username);
+          sessionStorage.setItem("hash", res.data[0].hash);
+          sessionStorage.setItem("id", res.data[0].user_id);
+          navigate("/recipes");
+        });
       })
       .catch((error) => {
+        console.log(error);
         if (error.response.status === 400) {
           alert(`${error.response.data.error}`);
+          console.log(error);
         } else if (error.response.status === 500) {
           alert(`${error.response.data.error}`);
         }
