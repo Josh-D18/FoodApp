@@ -1,13 +1,6 @@
 .recipe {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: aliceblue;
   height: 100vh;
   &__container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
 
   &__servings {
@@ -26,26 +19,48 @@
   &__dishtypes {
   }
 }
-
+section > h1 {
+  text-align: center;
+}
 .PDF {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: aliceblue;
+  flex-wrap: wrap;
+  background-color: rgb(80, 151, 99);
+  &__image {
+    width: 200px;
+  }
+
+  & > h1 {
+    text-align: center;
+  }
+
+  & > div:first-child {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
   &__ingredientsList {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     list-style: none;
-    padding: 0;
-    flex-direction: row;
-    justify-content: space-evenly;
+    padding: 1rem;
+    // flex-direction: row;
+    // justify-content: space-evenly;
 
+    & > li:before {
+      content: "❤";
+      margin-left: -20px;
+      margin-right: 10px;
+    }
     &-item {
       padding: 1rem;
       transition: 0.3s all ease-in-out;
-      &:hover {
-        font-size: 20px;
-      }
+      letter-spacing: 0.02rem;
+      color: whitesmoke;
     }
   }
 
@@ -54,20 +69,26 @@
 
   &__instructions {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
   }
 
   &__ingredientsContainer {
-    display: flex;
-    margin: 2rem;
+    // display: flex;
+    // margin: 2rem;
+    text-align: center;
   }
 
   &__ingredientsContainer-loopContainer {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    & > p {
+      font-size: 1.5rem;
+    }
   }
 }
+
+// h3,
+// h1,
+// p {
+//   color: whitesmoke;
+// }

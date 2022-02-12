@@ -6,10 +6,12 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import url from "../../config/config";
+import "./Login.scss";
+import { useState } from "react";
 
 function Login() {
   const navigate = useNavigate();
-
+  const [error, setErrors] = useState();
   const {
     register,
     handleSubmit,
@@ -17,13 +19,14 @@ function Login() {
   } = useForm();
 
   const loginUser = (data) => {
+    console.log(data);
     axios
       .post(`${url}/login`, {
         username: data.username,
         password: data.password,
       })
       .then(async (res) => {
-        console.log(res);
+        console.log(data.password);
         sessionStorage.setItem("token", res.data.token);
         await axios(`${url}/user/${res.data.user[0].id}`).then((res) => {
           sessionStorage.setItem("username", res.data[0].username);
@@ -35,78 +38,95 @@ function Login() {
       .catch((error) => {
         console.log(error);
         if (error.response.status === 400) {
-          alert(`${error.response.data.error}`);
-          console.log(error);
+          if (
+            error.response.data.message ===
+            "Cannot read property 'password' of undefined"
+          ) {
+            setErrors("Incorrect Password");
+          } else {
+            setErrors(`${error.response.data.message}`);
+          }
+          console.log({ error });
         } else if (error.response.status === 500) {
-          alert(`${error.response.data.error}`);
+          setErrors(`${error.response.data.message}`);
         }
       });
   };
-
+  console.log(error);
   return (
-    <>
-      <form onSubmit={handleSubmit(loginUser)}>
-        <Container maxWidth="xs">
-          <h2 className="login__title">Login</h2>
-          <Box mb={2} mt={14}>
-            <TextField
-              label="Name"
-              variant="outlined"
-              color="secondary"
-              placeholder="Name"
-              fullWidth
-              {...register("username", {
-                required: "Please Enter Your Name",
-                maxLength: 20,
-              })}
-              error={!!errors?.username}
-              helperText={errors?.username ? errors.username.message : null}
-            />
-          </Box>
+    <div className="container">
+      <div className="login__backgroundImage">
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit(loginUser)} className="login__form">
+          <Container maxWidth="xs">
+            <Box className="login__nameContainer" mb={2}>
+              <label>Name:</label>
+              <br />
+              <TextField
+                variant="outlined"
+                color="secondary"
+                placeholder="Name"
+                fullWidth
+                {...register("username", {
+                  required: "Please Enter Your Name",
+                  maxLength: 20,
+                })}
+                error={!!errors?.username}
+                helperText={errors?.username ? errors.username.message : null}
+              />
+            </Box>
 
-          <Box mb={2} mt={2}>
-            <TextField
-              label="Password"
-              variant="outlined"
-              color="secondary"
-              type={"password"}
-              fullWidth
-              placeholder="Password"
-              {...register("password", {
-                required: "Please Enter Your Password",
-                maxLength: 20,
-              })}
-              error={!!errors?.password}
-              helperText={errors?.password ? errors.password.message : null}
-            />
-          </Box>
-
-          <Box>
-            <Button
-              sx={{
-                backgroundColor: "#62ee",
-              }}
-              variant="contained"
-              color="secondary"
-              type="submit"
-              size="small"
-            >
-              Login
-            </Button>
-          </Box>
-          <Box>
-            <Button
-              variant="outlined"
-              color="secondary"
-              size="small"
-              onClick={() => navigate("/register")}
-            >
-              Sign Up
-            </Button>
-          </Box>
-        </Container>
-      </form>
-    </>
+            <Box className="login__passwordContainer" mb={2} mt={2}>
+              <label>Password:</label>
+              <TextField
+                variant="outlined"
+                color="secondary"
+                type={"password"}
+                fullWidth
+                placeholder="Password"
+                {...register("password", {
+                  required: "Please Enter Your Password",
+                  maxLength: 20,
+                })}
+                error={!!errors?.password}
+                helperText={errors?.password ? errors.password.message : null}
+              />
+              <code>{error}</code>
+            </Box>
+            <div className="login__btnContainer">
+              <Box>
+                <Button
+                  sx={{
+                    backgroundColor: "green",
+                    color: "white",
+                  }}
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                  size="small"
+                >
+                  Submit
+                </Button>
+              </Box>
+              <Box>
+                <Button
+                  sx={{
+                    backgroundColor: "green",
+                    color: "white",
+                  }}
+                  variant="outlined"
+                  color="secondary"
+                  size="small"
+                  onClick={() => navigate("/register")}
+                >
+                  Sign Up
+                </Button>
+              </Box>
+            </div>
+          </Container>
+        </form>
+      </div>
+    </div>
   );
 }
 

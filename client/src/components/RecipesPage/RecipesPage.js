@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./RecipesPage.scss";
-import { Container } from "@mui/material";
 import { Button } from "@mui/material";
 import url from "../../config/config";
 
@@ -78,10 +77,10 @@ function RecipesPage() {
 
   return (
     <article className="recipes">
-      <div className="recipes__container">
+      <div className="recipes__form-container">
         <h1>Recipes</h1>
         <form onSubmit={handleSubmit} className="recipes__form">
-          <Container className="recipe__form-container" maxWidth="xs">
+          <div className="recipes__form-container" maxWidth="xs">
             <label htmlFor="mealType">Enter A Recipe:</label>
             <input
               placeholder="Enter Recipe"
@@ -170,16 +169,16 @@ function RecipesPage() {
             </select>
             <Button
               sx={{
-                backgroundColor: "#62ee",
+                backgroundColor: "green",
+                color: "white",
               }}
               variant="contained"
-              color="secondary"
               type="submit"
               size="small"
             >
               Submit
             </Button>
-          </Container>
+          </div>
         </form>
       </div>
       <article className="recipes__food">
@@ -190,13 +189,12 @@ function RecipesPage() {
             recipe.map((item) => (
               <Link key={item.id} to={`/recipes/${item.id}`}>
                 <div className="recipes__container">
-                  <h2 className="recipes__title">{item.title}</h2>
-
                   <img
                     className="recipes__image"
                     src={item.image}
                     alt="Recipe"
                   />
+                  <h2 className="recipes__title">{item.title}</h2>
                 </div>
               </Link>
             ))

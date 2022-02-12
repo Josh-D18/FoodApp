@@ -2,6 +2,7 @@ import React from "react";
 import ReactToPdf from "react-to-pdf";
 import "../RecipePage/RecipePage.scss";
 import Button from "@mui/material/Button";
+import "../PDF/PDF.scss";
 export default function PDF({
   ingredients,
   image,
@@ -19,15 +20,12 @@ export default function PDF({
     <ReactToPdf options={options} x={0.8} y={0.8} scale={1}>
       {({ toPdf, targetRef }) => (
         <div ref={ref}>
-          <div
-            className="PDF"
-            ref={targetRef}
-
-            // style={{ height: 500 }}
-          >
-            <h1>{title}</h1>
+          <div className="PDF" ref={targetRef}>
             <div className="PDF__ingredientsContainer">
-              <img src={image} alt="Recipe" />
+              <div>
+                <h1>{title}</h1>
+                <img src={image} alt="Recipe" className="PDF__image" />
+              </div>
               <div className="PDF__ingredientsContainer-loopContainer">
                 <h3>Ingredients</h3>
                 <ul className="PDF__ingredientsList">
