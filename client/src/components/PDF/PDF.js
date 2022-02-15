@@ -12,9 +12,9 @@ export default function PDF({
 }) {
   const ref = React.createRef();
   const options = {
-    orientation: "landscape",
+    orientation: "portrait",
     unit: "in",
-    format: [15, 17],
+    format: [17, 21],
   };
   return (
     <ReactToPdf options={options} x={0.8} y={0.8} scale={1}>

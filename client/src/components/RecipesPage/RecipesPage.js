@@ -80,7 +80,7 @@ function RecipesPage() {
       <div className="recipes__form-container">
         <h1>Recipes</h1>
         <form onSubmit={handleSubmit} className="recipes__form">
-          <div className="recipes__form-container" maxWidth="xs">
+          <div className="recipes__form-container">
             <label htmlFor="mealType">Enter A Recipe:</label>
             <input
               placeholder="Enter Recipe"
