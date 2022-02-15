@@ -1,13 +1,13 @@
 .recipes {
   background-color: rgba(100, 216, 121, 0.133);
-  height: 100%;
+
   &__food {
     margin-top: 4rem;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     justify-content: center;
-    background-color: rgba(100, 216, 121, 0.133);
+    // background-color: rgba(100, 216, 121, 0.133);
   }
 
   &__form-container {
